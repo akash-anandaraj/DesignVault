@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>DesignVault</title>
+</head>
+<body>
+
+<h2>Add Asset</h2>
+
+<form th:action="@{/add}" th:object="${asset}" method="post">
+    Project Name:
+    <input type="text" th:field="*{projectName}" required /><br><br>
+
+    Category:
+    <select th:field="*{category}">
+        <option value="Logo">Logo</option>
+        <option value="Poster">Poster</option>
+        <option value="Thumbnail">Thumbnail</option>
+        <option value="Video Edit">Video Edit</option>
+    </select><br><br>
+
+    Description:
+    <input type="text" th:field="*{description}" /><br><br>
+
+    File Path:
+    <input type="text" th:field="*{filePath}" /><br><br>
+
+    <button type="submit">Add</button>
+</form>
+
+<hr>
+
+<h2>Search</h2>
+
+<form th:action="@{/search}" method="get">
+    Category:
+    <input type="text" name="category" required />
+    <button type="submit">Search</button>
+</form>
+
+<hr>
+
+<h2>All Assets</h2>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>Project</th>
+        <th>Category</th>
+        <th>Description</th>
+        <th>File Path</th>
+    </tr>
+    </thead>
+
+    <tbody th:if="${assets != null}">
+    <tr th:each="a : ${assets}">
+        <td th:text="${a.projectName}"></td>
+        <td th:text="${a.category}"></td>
+        <td th:text="${a.description}"></td>
+        <td th:text="${a.filePath}"></td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
